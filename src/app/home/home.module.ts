@@ -8,7 +8,10 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 
-import { NgCalendarModule  } from 'ionic6-calendar';
+import { HttpClientModule } from '@angular/common/http';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 
 @NgModule({
   imports: [
@@ -16,9 +19,13 @@ import { NgCalendarModule  } from 'ionic6-calendar';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    NgCalendarModule
+    HttpClientModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
-  declarations: [HomePage, ],
-  // exports: [CalendarEventsComponent]
+  declarations: [ HomePage, ],
+  exports: [ HomePage ]
 })
 export class HomePageModule {}
